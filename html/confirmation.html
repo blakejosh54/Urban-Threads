@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+    <title>Urban Threads | Order Confirmed</title>
+  </head>
+  <body>
+    <header class="navbar">
+      <h1 class="logo">Urban Threads</h1>
+      <nav>
+        <ul class="nav-links">
+          <li id="user-display" class="user-display"></li>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="./shop.html">Shop</a></li>
+          <li><a href="./cart.html">Cart</a></li>
+          <li><a href="./login.html" id="login-link">Login</a></li>
+          <li><a href="#" id="logout-link" style="display: none">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="confirmation-page">
+      <div class="confirmation-card">
+        <div class="confirmation-icon">✓</div>
+        <h2>Order Confirmed</h2>
+        <p>Thank you for shopping with Urban Threads.</p>
+        <p>Your order has been placed successfully.</p>
+
+        <div id="confirmation-details">
+          <p>Loading order summary...</p>
+        </div>
+
+        <div class="confirmation-actions">
+          <a href="./shop.html" class="continue-shopping-btn"
+            >Continue Shopping</a
+          >
+          <a href="../index.html" class="back-home-btn">Back Home</a>
+        </div>
+      </div>
+    </main>
+
+    <script type="module" src="../js/confirmation.js"></script>
+    <script type="module" src="../js/auth.js"></script>
+  </body>
+</html>

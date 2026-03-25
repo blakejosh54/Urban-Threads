@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+    <title>Urban Threads | Cart</title>
+  </head>
+  <body class="auth-checking">
+    <div id="auth-loader" class="page-loader">Checking your account...</div>
+
+    <header class="navbar">
+      <h1 class="logo">Urban Threads</h1>
+      <nav>
+        <ul class="nav-links">
+          <li id="user-display" class="user-display"></li>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="./shop.html">Shop</a></li>
+          <li><a href="./cart.html">Cart</a></li>
+          <li><a href="./login.html" id="login-link">Login</a></li>
+          <li><a href="#" id="logout-link" style="display: none">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="cart-page">
+      <h2>Your Cart</h2>
+      <p id="cart-status" class="cart-status" aria-live="polite"></p>
+      <div id="cart-container"></div>
+      <h3 id="cart-total"></h3>
+
+      <div class="cart-actions">
+        <a href="./shop.html" class="continue-shopping-btn">
+          ← Continue Shopping
+        </a>
+        <button class="checkout-btn" type="button">
+          Proceed to Checkout →
+        </button>
+      </div>
+    </main>
+
+    <script type="module" src="../js/protect-cart.js"></script>
+    <script type="module" src="../js/cart.js"></script>
+    <script type="module" src="../js/auth.js"></script>
+  </body>
+</html>

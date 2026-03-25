@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Urban Threads | Shop</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <h1 class="logo">Urban Threads</h1>
+      <nav>
+        <ul class="nav-links">
+          <li id="user-display" class="user-display"></li>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="./shop.html">Shop</a></li>
+          <li><a href="./cart.html">Cart</a></li>
+          <li><a href="./login.html" id="login-link">Login</a></li>
+          <li><a href="#" id="logout-link" style="display: none">Logout</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="shop-page">
+      <section class="shop-header">
+        <h2>Shop Our Collection</h2>
+        <p>Browse our latest streetwear products.</p>
+        <p id="product-status" class="product-status" aria-live="polite"></p>
+      </section>
+
+      <section id="products-container" class="products-grid">
+        <p>Loading products...</p>
+      </section>
+    </main>
+
+    <script type="module" src="../js/products.js"></script>
+    <script type="module" src="../js/auth.js"></script>
+  </body>
+</html>

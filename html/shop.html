@@ -6,27 +6,204 @@
     <title>Urban Threads | Shop</title>
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/responsive.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header class="navbar">
       <h1 class="logo">Urban Threads</h1>
+
       <nav>
         <ul class="nav-links">
-          <li id="user-display" class="user-display"></li>
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="./shop.html">Shop</a></li>
-          <li><a href="./cart.html">Cart</a></li>
-          <li><a href="./login.html" id="login-link">Login</a></li>
-          <li><a href="#" id="logout-link" style="display: none">Logout</a></li>
+          <li id="user-display" class="user-display desktop-nav-item"></li>
+          <li class="desktop-nav-item"><a href="../index.html">Home</a></li>
+          <li class="desktop-nav-item"><a href="./shop.html">Shop</a></li>
+
+          <li>
+            <a href="./cart.html" class="cart-link">
+              <span class="material-icons cart-material-icon"
+                >shopping_cart</span
+              >
+              <span id="cart-count" class="cart-count">0</span>
+            </a>
+          </li>
+
+          <li class="desktop-nav-item">
+            <a href="./login.html" id="login-link">Login</a>
+          </li>
+
+          <li class="desktop-nav-item">
+            <a href="#" id="logout-link" style="display: none">Logout</a>
+          </li>
+
+          <li class="menu-toggle-item">
+            <button
+              type="button"
+              id="menu-toggle"
+              class="menu-toggle"
+              aria-label="Open menu"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+            >
+              <span class="material-icons">menu</span>
+            </button>
+          </li>
         </ul>
       </nav>
+
+      <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+        <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+
+        <aside class="mobile-menu-panel" aria-label="Mobile navigation">
+          <div class="mobile-menu-top">
+            <div>
+              <p class="mobile-menu-label">Urban Threads</p>
+              <p id="mobile-user-display" class="mobile-user-display"></p>
+            </div>
+
+            <button
+              type="button"
+              id="mobile-menu-close"
+              class="mobile-menu-close"
+              aria-label="Close menu"
+            >
+              <span class="material-icons">close</span>
+            </button>
+          </div>
+
+          <nav class="mobile-menu-nav">
+            <a href="../index.html" class="mobile-menu-link">Home</a>
+            <a href="./shop.html" class="mobile-menu-link">Shop</a>
+            <a href="./cart.html" class="mobile-menu-link">Cart</a>
+            <a
+              href="./login.html"
+              id="mobile-login-link"
+              class="mobile-menu-link"
+              >Login</a
+            >
+            <a
+              href="#"
+              id="mobile-logout-link"
+              class="mobile-menu-link"
+              style="display: none"
+              >Logout</a
+            >
+          </nav>
+        </aside>
+      </div>
     </header>
 
     <main class="shop-page">
       <section class="shop-header">
+        <p class="shop-collection">Urban Threads Collection</p>
         <h2>Shop Our Collection</h2>
         <p>Browse our latest streetwear products.</p>
         <p id="product-status" class="product-status" aria-live="polite"></p>
+      </section>
+
+      <section class="shop-controls" aria-label="Shop filters">
+        <div class="search-wrapper">
+          <span class="material-icons search-icon" aria-hidden="true"
+            >search</span
+          >
+          <input
+            type="search"
+            id="search-input"
+            class="search-input"
+            placeholder="Search"
+            aria-label="Search products"
+          />
+        </div>
+
+        <div class="filter-toolbar">
+          <div
+            id="category-filters"
+            class="category-filters"
+            role="group"
+            aria-label="Filter products by category"
+          >
+            <button
+              type="button"
+              class="category-btn active"
+              data-category="All"
+            >
+              All
+            </button>
+          </div>
+
+          <div class="filter-actions">
+            <div class="price-filter-wrapper">
+              <button
+                type="button"
+                id="price-filter-btn"
+                class="price-filter-btn"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Price Filter
+                <span class="material-icons">expand_more</span>
+              </button>
+
+              <div
+                id="price-filter-menu"
+                class="price-filter-menu"
+                aria-label="Price filter options"
+              >
+                <button
+                  type="button"
+                  class="price-option active"
+                  data-price="all"
+                >
+                  All Prices
+                </button>
+                <button
+                  type="button"
+                  class="price-option"
+                  data-price="under-500"
+                >
+                  Under R500
+                </button>
+                <button type="button" class="price-option" data-price="500-999">
+                  R500 - R999
+                </button>
+                <button
+                  type="button"
+                  class="price-option"
+                  data-price="1000-1499"
+                >
+                  R1000 - R1499
+                </button>
+                <button
+                  type="button"
+                  class="price-option"
+                  data-price="1500-plus"
+                >
+                  R1500+
+                </button>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              id="clear-filters-btn"
+              class="clear-filters-btn"
+            >
+              Clear Filters
+            </button>
+          </div>
+        </div>
+
+        <div class="results-bar">
+          <p id="results-count" class="results-count">Loading products...</p>
+        </div>
       </section>
 
       <section id="products-container" class="products-grid">

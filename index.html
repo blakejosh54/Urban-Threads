@@ -5,28 +5,345 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/responsive.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
     <title>Urban Threads</title>
   </head>
   <body>
     <header class="navbar">
       <h1 class="logo">Urban Threads</h1>
+
       <nav>
         <ul class="nav-links">
-          <li id="user-display" class="user-display"></li>
-          <li><a href="./index.html">Home</a></li>
-          <li><a href="./html/shop.html">Shop</a></li>
-          <li><a href="./html/cart.html">Cart</a></li>
-          <li><a href="./html/login.html" id="login-link">Login</a></li>
-          <li><a href="#" id="logout-link" style="display: none">Logout</a></li>
+          <li id="user-display" class="user-display desktop-nav-item"></li>
+          <li class="desktop-nav-item">
+            <a href="./index.html" class="active-page">Home</a>
+          </li>
+          <li class="desktop-nav-item"><a href="./html/shop.html">Shop</a></li>
+
+          <li>
+            <a href="./html/cart.html" class="cart-link">
+              <span class="material-icons cart-material-icon"
+                >shopping_cart</span
+              >
+              <span id="cart-count" class="cart-count">0</span>
+            </a>
+          </li>
+
+          <li class="desktop-nav-item">
+            <a href="./html/login.html" id="login-link">Login</a>
+          </li>
+
+          <li class="desktop-nav-item">
+            <a href="#" id="logout-link" style="display: none">Logout</a>
+          </li>
+
+          <li class="menu-toggle-item">
+            <button
+              type="button"
+              id="menu-toggle"
+              class="menu-toggle"
+              aria-label="Open menu"
+              aria-controls="mobile-menu"
+              aria-expanded="false"
+            >
+              <span class="material-icons">menu</span>
+            </button>
+          </li>
         </ul>
       </nav>
+
+      <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+        <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+
+        <aside class="mobile-menu-panel" aria-label="Mobile navigation">
+          <div class="mobile-menu-top">
+            <div>
+              <p class="mobile-menu-label">Urban Threads</p>
+              <p id="mobile-user-display" class="mobile-user-display"></p>
+            </div>
+
+            <button
+              type="button"
+              id="mobile-menu-close"
+              class="mobile-menu-close"
+              aria-label="Close menu"
+            >
+              <span class="material-icons">close</span>
+            </button>
+          </div>
+
+          <nav class="mobile-menu-nav">
+            <a href="./index.html" class="mobile-menu-link active-page">Home</a>
+            <a href="./html/shop.html" class="mobile-menu-link">Shop</a>
+            <a href="./html/cart.html" class="mobile-menu-link">Cart</a>
+            <a
+              href="./html/login.html"
+              id="mobile-login-link"
+              class="mobile-menu-link"
+              >Login</a
+            >
+            <a
+              href="#"
+              id="mobile-logout-link"
+              class="mobile-menu-link"
+              style="display: none"
+              >Logout</a
+            >
+          </nav>
+        </aside>
+      </div>
     </header>
 
-    <main>
-      <h1>Home</h1>
-      <h2>Welcome to Urban Threads</h2>
-      <p>Your casual streetwear store.</p>
+    <main class="home-page">
+      <section class="hero-section">
+        <div class="hero-background-glow hero-background-glow-left"></div>
+        <div class="hero-background-glow hero-background-glow-right"></div>
+
+        <div class="hero-copy-panel">
+          <p class="hero-tag">Premium streetwear</p>
+
+          <div class="hero-heading-stack">
+            <p class="hero-kicker">URBAN THREADS 2026</p>
+            <h1>Built for city nights, fast mornings, and statement fits.</h1>
+          </div>
+
+          <p class="hero-description">
+            A high-end streetwear brand that lives in the rhythm of the city.
+            Sharp silhouettes, elevated basics, and bold layers designed to move
+            from campus to downtown without missing a beat.
+          </p>
+
+          <div class="hero-actions">
+            <a href="./html/shop.html" class="hero-btn-primary"
+              >Shop Collection</a
+            >
+            <a href="./html/login.html" class="hero-btn-secondary"
+              >Become a Member</a
+            >
+          </div>
+
+          <div class="hero-metrics">
+            <article class="hero-metric-card">
+              <div>
+                <h3>Luxury street essentials</h3>
+                <p>
+                  Minimal palettes, oversized comfort, and standout structure.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="hero-visual-panel">
+          <article class="hero-feature-card hero-feature-main">
+            <div class="hero-feature-image tall-image">
+              <img
+                src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80"
+                alt="Fashion model wearing an elevated streetwear outfit in the city"
+              />
+            </div>
+
+            <div class="hero-feature-content">
+              <p class="hero-card-label">Featured edit</p>
+              <h2>Midnight Layers</h2>
+              <p>
+                Textured outerwear, tailored street silhouettes, and monochrome
+                styling built for cooler city evenings.
+              </p>
+            </div>
+          </article>
+
+          <div class="hero-side-cards">
+            <article class="hero-mini-card hero-mini-card-with-image">
+              <div class="hero-mini-card-image compact-image">
+                <img
+                  src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80"
+                  alt="Minimal premium streetwear look in neutral tones"
+                />
+              </div>
+              <div class="hero-mini-card-copy">
+                <p class="hero-card-label">Trending</p>
+                <h3>Clean Basics</h3>
+                <p>
+                  Refined essentials that make everyday outfits feel premium.
+                </p>
+              </div>
+            </article>
+
+            <article class="hero-mini-card hero-mini-image-card">
+              <div class="hero-feature-image compact-image">
+                <img
+                  src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=900&q=80"
+                  alt="Streetwear model in a modern urban environment"
+                />
+              </div>
+              <div class="hero-mini-image-copy">
+                <p class="hero-card-label">New season</p>
+                <h3>Off-Duty Uniform</h3>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="home-section intro-strip-section">
+        <div class="intro-strip">
+          <div class="intro-strip-text">
+            <p class="section-tag">Brand mood</p>
+            <h2>Fast fashion. Basic streetwear. A sharper identity.</h2>
+          </div>
+
+          <div class="intro-strip-stats">
+            <div class="intro-stat">
+              <span>Green</span>
+              <p>Most of our clothing materials are sourced from recycling</p>
+            </div>
+
+            <div class="intro-stat">
+              <span>Unique</span>
+              <p>Express your inner-self with our one of a kind style</p>
+            </div>
+
+            <div class="intro-stat">
+              <span>Wearable</span>
+              <p>
+                Pieces made for everyday confidence, not just showcase visuals.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="home-section editorial-section">
+        <div class="section-title-wrap split-heading">
+          <div>
+            <p class="section-tag">Editorial picks</p>
+            <h2>Three style directions.</h2>
+          </div>
+        </div>
+
+        <div class="style-grid editorial-grid">
+          <article class="style-card editorial-card editorial-card-large">
+            <div class="editorial-card-top">
+              <p class="editorial-index">01</p>
+              <span class="editorial-pill">Signature</span>
+            </div>
+            <h3>After Dark</h3>
+            <p>
+              Heavyweight layers, matte textures, and deep neutrals for a more
+              elevated night life look.
+            </p>
+          </article>
+
+          <article class="style-card editorial-card editorial-card-light">
+            <div class="editorial-card-top">
+              <p class="editorial-index">02</p>
+              <span class="editorial-pill">Essential</span>
+            </div>
+            <h3>Core Uniform</h3>
+            <p>
+              Crisp tees, premium hoodies, and clean cuts that dont rely on
+              over-design to feel expensive.
+            </p>
+          </article>
+
+          <article class="style-card editorial-card editorial-card-tall">
+            <div class="editorial-card-top">
+              <p class="editorial-index">03</p>
+              <span class="editorial-pill">Statement</span>
+            </div>
+            <h3>Motion</h3>
+            <p>
+              Sport meets luxury with pieces made for pace, comfort, and visual
+              impact.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="home-section spotlight-section">
+        <div class="spotlight-layout">
+          <div class="spotlight-gallery">
+            <article class="spotlight-image-card spotlight-image-large">
+              <img
+                src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&q=80"
+                alt="High-end fashion portrait with urban styling"
+              />
+            </article>
+
+            <article class="spotlight-image-card spotlight-image-small">
+              <img
+                src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80"
+                alt="Modern fashion outfit photographed on a city street"
+              />
+            </article>
+          </div>
+
+          <div class="spotlight-copy">
+            <p class="section-tag">Why it works</p>
+            <h2>A brand that feels like comfort over status</h2>
+            <p></p>
+
+            <div class="spotlight-points">
+              <div class="spotlight-point">
+                <span class="material-icons">check_circle</span>
+                <p>Everything is made and sourced locally in South Africa</p>
+              </div>
+              <div class="spotlight-point">
+                <span class="material-icons">check_circle</span>
+                <p>
+                  Our team of young designers know exactly the wants and needs
+                  of the younger generation and are geared at delivering towards
+                  them
+                </p>
+              </div>
+              <div class="spotlight-point">
+                <span class="material-icons">check_circle</span>
+                <p>
+                  Urban Threads works because it turns everyday comfort into
+                  something visually sharp and confidence-building. Every piece
+                  is designed to feel effortless to wear while still looking
+                  bold enough to stand out.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-section">
+        <div class="cta-copy">
+          <p class="section-tag">Urban Threads</p>
+          <h2>Step into the collection and own the city aesthetic.</h2>
+          <p>Explore premium streetwear</p>
+        </div>
+
+        <div class="cta-actions">
+          <a href="./html/shop.html" class="hero-btn-primary"
+            >Browse</a
+          >
+          <a href="./html/login.html" class="hero-btn-secondary"
+            >Login</a
+          >
+        </div>
+      </section>
     </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <p>© 2026 Urban Threads</p>
+        <p>Cape Town, South Africa</p>
+      </div>
+    </footer>
 
     <script type="module" src="./js/main.js"></script>
     <script type="module" src="./js/auth.js"></script>

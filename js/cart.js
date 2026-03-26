@@ -141,7 +141,7 @@ async function loadCart() {
       details.appendChild(controls);
       details.appendChild(totalText);
       details.appendChild(removeBtn);
-      
+
       wrapper.appendChild(image);
       wrapper.appendChild(details);
 
@@ -176,29 +176,25 @@ async function changeQuantity(productId, change) {
 
   try {
     const itemRef = doc(db, "users", user.uid, "cart", productId);
+    const itemSnap = await getDoc(itemRef);
 
-    if (change < 0) {
-      const itemSnap = await getDoc(itemRef);
-
-      if (!itemSnap.exists()) {
-        updatingCart = false;
-        return;
-      }
-
-      const currentQty = Number(itemSnap.data().quantity) || 0;
-
-      if (currentQty <= 1) {
-        await deleteDoc(itemRef);
-      } else {
-        await updateDoc(itemRef, {
-          quantity: increment(change),
-        });
-      }
-    } else {
-      await updateDoc(itemRef, {
-        quantity: increment(change),
-      });
+    if (!itemSnap.exists()) {
+      return;
     }
+
+    const currentQty = Number(itemSnap.data().quantity) || 1;
+
+    if (change < 0 && currentQty <= 1) {
+      showCartStatus(
+        "Use the Remove button to remove this item from your cart.",
+        "info",
+      );
+      return;
+    }
+
+    await updateDoc(itemRef, {
+      quantity: increment(change),
+    });
 
     await loadCart();
   } catch (error) {

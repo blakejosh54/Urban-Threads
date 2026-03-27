@@ -25,6 +25,17 @@
         <ul class="nav-links">
           <li id="user-display" class="user-display desktop-nav-item"></li>
           <li class="desktop-nav-item">
+            <button
+              type="button"
+              id="theme-toggle"
+              class="theme-toggle-btn"
+              aria-label="Toggle theme"
+              aria-pressed="false"
+            >
+              Light Mode
+            </button>
+          </li>
+          <li class="desktop-nav-item">
             <a href="./index.html" class="active-page">Home</a>
           </li>
           <li class="desktop-nav-item"><a href="./html/shop.html">Shop</a></li>
@@ -99,6 +110,16 @@
               >Logout</a
             >
           </nav>
+
+          <button
+            type="button"
+            id="mobile-theme-toggle"
+            class="mobile-theme-toggle-btn"
+            aria-label="Toggle theme"
+            aria-pressed="false"
+          >
+            Light Mode
+          </button>
         </aside>
       </div>
     </header>
@@ -328,12 +349,8 @@
         </div>
 
         <div class="cta-actions">
-          <a href="./html/shop.html" class="hero-btn-primary"
-            >Browse</a
-          >
-          <a href="./html/login.html" class="hero-btn-secondary"
-            >Login</a
-          >
+          <a href="./html/shop.html" class="hero-btn-primary">Browse</a>
+          <a href="./html/login.html" class="hero-btn-secondary">Login</a>
         </div>
       </section>
     </main>

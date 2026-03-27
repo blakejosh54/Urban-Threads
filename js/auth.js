@@ -38,7 +38,13 @@ const mobileMenuClose = document.getElementById("mobile-menu-close");
 
 const navbar = document.querySelector(".navbar");
 
-/* Home page auth-only buttons */
+const themeToggle = document.getElementById("theme-toggle");
+const mobileThemeToggle = document.getElementById("mobile-theme-toggle");
+
+const THEME_STORAGE_KEY = "urban-threads-theme";
+const DARK_THEME = "dark";
+const LIGHT_THEME = "light";
+
 const heroMemberButton = document.querySelector(
   '.hero-actions .hero-btn-secondary[href*="login.html"]',
 );
@@ -200,6 +206,48 @@ function closeMobileMenu() {
 
   if (menuToggle) {
     menuToggle.setAttribute("aria-expanded", "false");
+  }
+}
+
+function applyTheme(theme) {
+  const nextTheme = theme === LIGHT_THEME ? LIGHT_THEME : DARK_THEME;
+  document.body.classList.toggle("light-theme", nextTheme === LIGHT_THEME);
+
+  const toggleText = nextTheme === LIGHT_THEME ? "Dark Mode" : "Light Mode";
+  const isLightTheme = nextTheme === LIGHT_THEME;
+
+  if (themeToggle) {
+    themeToggle.textContent = toggleText;
+    themeToggle.setAttribute("aria-pressed", String(isLightTheme));
+  }
+
+  if (mobileThemeToggle) {
+    mobileThemeToggle.textContent = toggleText;
+    mobileThemeToggle.setAttribute("aria-pressed", String(isLightTheme));
+  }
+}
+
+function loadSavedTheme() {
+  const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+  applyTheme(savedTheme === LIGHT_THEME ? LIGHT_THEME : DARK_THEME);
+}
+
+function toggleTheme() {
+  const isLightTheme = document.body.classList.contains("light-theme");
+  const nextTheme = isLightTheme ? DARK_THEME : LIGHT_THEME;
+  localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+  applyTheme(nextTheme);
+}
+
+function setupThemeToggle() {
+  loadSavedTheme();
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", toggleTheme);
+  }
+
+  if (mobileThemeToggle) {
+    mobileThemeToggle.addEventListener("click", toggleTheme);
   }
 }
 
@@ -434,10 +482,13 @@ if (mobileLogoutLink) {
 }
 
 function setActiveMobileMenuLink() {
-  const mobileMenuLinks = document.querySelectorAll(".mobile-menu-link");
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
 
-  mobileMenuLinks.forEach((link) => {
+  const allNavLinks = document.querySelectorAll(
+    ".nav-links a, .mobile-menu-link",
+  );
+
+  allNavLinks.forEach((link) => {
     const linkPage = link.getAttribute("href")?.split("/").pop();
 
     if (linkPage === currentPage) {
@@ -450,6 +501,7 @@ function setActiveMobileMenuLink() {
   });
 }
 
+setupThemeToggle();
 setupMobileMenu();
 setActiveMobileMenuLink();
 setupNavbarScroll();

@@ -560,3 +560,20 @@ body.nav-is-hidden .navbar {
     gap: 16px;
   }
 }
+
+/*theme change */
+@media (max-width: 1024px) {
+  .theme-toggle-btn {
+    display: none;
+  }
+
+  .mobile-theme-toggle-btn {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 1025px) {
+  .mobile-theme-toggle-btn {
+    display: none;
+  }
+}

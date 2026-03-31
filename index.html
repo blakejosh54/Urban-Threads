@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="stylesheet" href="./css/responsive.css" />
     <link
+      rel="shortcut icon"
+      href="./assets/city-favicon.svg"
+      type="image/x-icon"
+    />
+    <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
@@ -24,6 +29,16 @@
       <nav>
         <ul class="nav-links">
           <li id="user-display" class="user-display desktop-nav-item"></li>
+          <li class="desktop-nav-item">
+            <a
+              href="./html/admin.html"
+              id="admin-link"
+              class="admin-nav-link"
+              style="display: none"
+            >
+              Admin Panel
+            </a>
+          </li>
           <li class="desktop-nav-item">
             <button
               type="button"
@@ -111,6 +126,14 @@
             >
           </nav>
 
+          <a
+            href="./html/admin.html"
+            id="mobile-admin-link"
+            class="mobile-menu-link mobile-admin-link"
+            style="display: none"
+            >Admin Panel</a
+          >
+
           <button
             type="button"
             id="mobile-theme-toggle"
@@ -147,9 +170,13 @@
             <a href="./html/shop.html" class="hero-btn-primary"
               >Shop Collection</a
             >
-            <a href="./html/login.html" class="hero-btn-secondary"
-              >Become a Member</a
+            <a
+              href="./html/login.html"
+              class="hero-btn-secondary"
+              id="hero-member-link"
             >
+              Become a Member
+            </a>
           </div>
 
           <div class="hero-metrics">
@@ -173,7 +200,7 @@
               />
             </div>
 
-            <div class="hero-feature-content">
+            <div class="hero-content">
               <p class="hero-card-label">Featured edit</p>
               <h2>Midnight Layers</h2>
               <p>
@@ -184,7 +211,7 @@
           </article>
 
           <div class="hero-side-cards">
-            <article class="hero-mini-card hero-mini-card-with-image">
+            <article class="hero-mini-card hero-card-with-image">
               <div class="hero-mini-card-image compact-image">
                 <img
                   src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80"
@@ -204,7 +231,7 @@
               <div class="hero-feature-image compact-image">
                 <img
                   src="https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=900&q=80"
-                  alt="Streetwear model in a modern urban environment"
+                  alt="streetwear model"
                 />
               </div>
               <div class="hero-mini-image-copy">
@@ -216,7 +243,7 @@
         </div>
       </section>
 
-      <section class="home-section intro-strip-section">
+      <section class="home-section intro-section">
         <div class="intro-strip">
           <div class="intro-strip-text">
             <p class="section-tag">Brand mood</p>
@@ -244,7 +271,7 @@
         </div>
       </section>
 
-      <section class="home-section editorial-section">
+      <section class="home-section editor-section">
         <div class="section-title-wrap split-heading">
           <div>
             <p class="section-tag">Editorial picks</p>
@@ -252,11 +279,11 @@
           </div>
         </div>
 
-        <div class="style-grid editorial-grid">
-          <article class="style-card editorial-card editorial-card-large">
-            <div class="editorial-card-top">
-              <p class="editorial-index">01</p>
-              <span class="editorial-pill">Signature</span>
+        <div class="style-grid editor-grid">
+          <article class="style-card editor-card editor-card-large">
+            <div class="editor-card-top">
+              <p class="editor-index">01</p>
+              <span class="editor-pill">Signature</span>
             </div>
             <h3>After Dark</h3>
             <p>
@@ -265,10 +292,10 @@
             </p>
           </article>
 
-          <article class="style-card editorial-card editorial-card-light">
-            <div class="editorial-card-top">
-              <p class="editorial-index">02</p>
-              <span class="editorial-pill">Essential</span>
+          <article class="style-card editor-card editor-card-light">
+            <div class="editor-card-top">
+              <p class="editor-index">02</p>
+              <span class="editor-pill">Essential</span>
             </div>
             <h3>Core Uniform</h3>
             <p>
@@ -277,10 +304,10 @@
             </p>
           </article>
 
-          <article class="style-card editorial-card editorial-card-tall">
-            <div class="editorial-card-top">
-              <p class="editorial-index">03</p>
-              <span class="editorial-pill">Statement</span>
+          <article class="style-card editor-card editor-card-tall">
+            <div class="editor-card-top">
+              <p class="editor-index">03</p>
+              <span class="editor-pill">Statement</span>
             </div>
             <h3>Motion</h3>
             <p>
@@ -350,7 +377,13 @@
 
         <div class="cta-actions">
           <a href="./html/shop.html" class="hero-btn-primary">Browse</a>
-          <a href="./html/login.html" class="hero-btn-secondary">Login</a>
+          <a
+            href="./html/login.html"
+            class="hero-btn-secondary"
+            id="cta-login-link"
+          >
+            Login
+          </a>
         </div>
       </section>
     </main>

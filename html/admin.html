@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Urban Threads | Shop</title>
+    <title>Urban Threads | Admin Panel</title>
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/responsive.css" />
     <link
@@ -22,7 +22,9 @@
       rel="stylesheet"
     />
   </head>
-  <body class="auth-checking">
+  <body class="auth-checking admin-page-body">
+    <div id="admin-loader" class="page-loader">Loading admin panel.</div>
+
     <header class="navbar">
       <h1 class="logo">Urban Threads</h1>
 
@@ -33,7 +35,7 @@
             <a
               href="./admin.html"
               id="admin-link"
-              class="admin-nav-link"
+              class="admin-nav-link active-page"
               style="display: none"
             >
               Admin Panel
@@ -122,15 +124,14 @@
               style="display: none"
               >Logout</a
             >
+            <a
+              href="./admin.html"
+              id="mobile-admin-link"
+              class="mobile-menu-link mobile-admin-link active-page"
+              style="display: none"
+              >Admin Panel</a
+            >
           </nav>
-
-          <a
-            href="./admin.html"
-            id="mobile-admin-link"
-            class="mobile-menu-link mobile-admin-link"
-            style="display: none"
-            >Admin Panel</a
-          >
 
           <button
             type="button"
@@ -145,122 +146,146 @@
       </div>
     </header>
 
-    <main class="shop-page">
-      <section class="shop-header">
-        <p class="shop-collection">Urban Threads Collection</p>
-        <h2>Shop Our Collection</h2>
-        <p>Browse our latest streetwear products.</p>
-        <p id="product-status" class="product-status" aria-live="polite"></p>
-      </section>
-
-      <section class="shop-controls" aria-label="Shop filters">
-        <div class="search-wrapper">
-          <span class="material-icons search-icon" aria-hidden="true"
-            >search</span
-          >
-          <input
-            type="search"
-            id="search-input"
-            class="search-input"
-            placeholder="Search"
-            aria-label="Search products"
-          />
+    <main class="admin-page">
+      <section class="admin-hero">
+        <div class="admin-hero-copy">
+          <p class="admin-kicker">Urban Threads Admin</p>
+          <h1>Store Overview</h1>
         </div>
 
-        <div class="filter-toolbar">
-          <div
-            id="category-filters"
-            class="category-filters"
-            role="group"
-            aria-label="Filter products by category"
+        <div class="admin-hero-actions">
+          <a href="./shop.html" class="admin-secondary-action">View Store</a>
+          <button
+            type="button"
+            id="refresh-dashboard-btn"
+            class="admin-primary-action"
           >
-            <button
-              type="button"
-              class="category-btn active"
-              data-category="All"
+            Refresh Dashboard
+          </button>
+        </div>
+      </section>
+
+      <section class="admin-metrics-grid">
+        <article class="admin-metric-card">
+          <div class="admin-metric-top">
+            <span class="material-icons">inventory_2</span>
+            <p>Total Products</p>
+          </div>
+          <h2 id="metric-products">0</h2>
+        </article>
+
+        <article class="admin-metric-card">
+          <div class="admin-metric-top">
+            <p>Total Orders</p>
+          </div>
+          <h2 id="metric-orders">0</h2>
+        </article>
+
+        <article class="admin-metric-card">
+          <div class="admin-metric-top">
+            <p>Registered Users</p>
+          </div>
+          <h2 id="metric-users">0</h2>
+        </article>
+
+        <article class="admin-metric-card">
+          <div class="admin-metric-top">
+            <p>Total Revenue</p>
+          </div>
+          <h2 id="metric-revenue">R0.00</h2>
+        </article>
+      </section>
+
+      <section class="admin-content-grid admin-simple-grid">
+        <section class="admin-panel-card admin-form-panel">
+          <div class="admin-panel-header">
+            <div>
+              <h3>Edit Product</h3>
+            </div>
+            <span id="product-form-mode" class="admin-chip"
+              >Select a product</span
             >
-              All
-            </button>
           </div>
 
-          <div class="filter-actions">
-            <div class="price-filter-wrapper">
-              <button
-                type="button"
-                id="price-filter-btn"
-                class="price-filter-btn"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Price Filter
-                <span class="material-icons">expand_more</span>
-              </button>
+          <form id="admin-product-form" class="admin-product-form" novalidate>
+            <input type="hidden" id="product-id" />
 
-              <div
-                id="price-filter-menu"
-                class="price-filter-menu"
-                aria-label="Price filter options"
-              >
-                <button
-                  type="button"
-                  class="price-option active"
-                  data-price="all"
-                >
-                  All Prices
-                </button>
-                <button
-                  type="button"
-                  class="price-option"
-                  data-price="under-500"
-                >
-                  Under R500
-                </button>
-                <button type="button" class="price-option" data-price="500-999">
-                  R500 - R999
-                </button>
-                <button
-                  type="button"
-                  class="price-option"
-                  data-price="1000-1499"
-                >
-                  R1000 - R1499
-                </button>
-                <button
-                  type="button"
-                  class="price-option"
-                  data-price="1500-plus"
-                >
-                  R1500+
-                </button>
-              </div>
+            <div class="admin-form-grid">
+              <label class="admin-field">
+                <span>Product Name</span>
+                <input
+                  type="text"
+                  id="product-name"
+                  placeholder="Choose a product first"
+                  required
+                />
+              </label>
+
+              <label class="admin-field">
+                <span>Price</span>
+                <input
+                  type="number"
+                  id="product-price"
+                  placeholder="0.00"
+                  min="0"
+                  step="0.01"
+                  required
+                />
+              </label>
             </div>
 
-            <button
-              type="button"
-              id="clear-filters-btn"
-              class="clear-filters-btn"
-            >
-              Clear Filters
-            </button>
+            <label class="admin-field">
+              <span>Description</span>
+              <textarea
+                id="product-description"
+                rows="5"
+                placeholder="Product description"
+                required
+              ></textarea>
+            </label>
+
+            <div class="admin-form-actions">
+              <button
+                type="submit"
+                id="save-product-btn"
+                class="admin-primary-action"
+              >
+                Update Product
+              </button>
+              <button
+                type="button"
+                id="reset-product-btn"
+                class="admin-secondary-action"
+              >
+                Clear Form
+              </button>
+            </div>
+
+            <p
+              id="admin-product-status"
+              class="admin-inline-status"
+              aria-live="polite"
+            ></p>
+          </form>
+        </section>
+
+        <section class="admin-panel-card admin-products-panel">
+          <div class="admin-panel-header">
+            <div>
+              <p class="admin-panel-label">Product Library</p>
+              <h3>Current Products</h3>
+            </div>
+            <p id="admin-products-count" class="admin-panel-meta">0 items</p>
           </div>
-        </div>
 
-        <div class="results-bar">
-          <p id="results-count" class="results-count">Loading products...</p>
-        </div>
-      </section>
-
-      <section
-        id="products-container"
-        class="products-grid"
-        aria-live="polite"
-        aria-busy="true"
-      >
-        <p>Loading products...</p>
+          <div id="admin-products-list" class="admin-products-list">
+            <p class="admin-empty-inline">Loading products.</p>
+          </div>
+        </section>
       </section>
     </main>
 
-    <script type="module" src="../js/products.js"></script>
+    <script type="module" src="../js/admin.js"></script>
     <script type="module" src="../js/auth.js"></script>
   </body>
 </html>

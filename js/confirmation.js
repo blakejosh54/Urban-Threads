@@ -26,8 +26,6 @@ function createTextElement(tag, text, className = "") {
 function renderOrderSummary(orderId, order) {
   if (!confirmationDetails) return;
 
-  confirmationDetails.innerHTML = "";
-
   const summary = document.createElement("div");
   summary.className = "confirmation-summary";
 
@@ -52,6 +50,7 @@ function renderOrderSummary(orderId, order) {
   itemsWrapper.appendChild(heading);
 
   const items = Array.isArray(order.items) ? order.items : [];
+  const fragment = document.createDocumentFragment();
 
   items.forEach((item) => {
     const itemCard = document.createElement("div");
@@ -61,6 +60,8 @@ function renderOrderSummary(orderId, order) {
     image.className = "confirmation-item-image";
     image.src = item.imageURL || "";
     image.alt = item.name || "Order item";
+    image.loading = "lazy";
+    image.decoding = "async";
 
     const info = document.createElement("div");
     info.className = "confirmation-item-info";
@@ -80,10 +81,15 @@ function renderOrderSummary(orderId, order) {
     );
 
     itemCard.append(image, info);
-    itemsWrapper.appendChild(itemCard);
+    fragment.appendChild(itemCard);
   });
 
-  confirmationDetails.append(summary, itemsWrapper);
+  itemsWrapper.appendChild(fragment);
+
+  window.requestAnimationFrame(() => {
+    confirmationDetails.innerHTML = "";
+    confirmationDetails.append(summary, itemsWrapper);
+  });
 }
 
 async function loadOrderSummary(user) {

@@ -31,6 +31,9 @@ const mobileLoginLink = document.getElementById("mobile-login-link");
 const mobileLogoutLink = document.getElementById("mobile-logout-link");
 const mobileUserDisplay = document.getElementById("mobile-user-display");
 
+const adminLink = document.getElementById("admin-link");
+const mobileAdminLink = document.getElementById("mobile-admin-link");
+
 const menuToggle = document.getElementById("menu-toggle");
 const mobileMenu = document.getElementById("mobile-menu");
 const mobileMenuOverlay = document.getElementById("mobile-menu-overlay");
@@ -45,12 +48,10 @@ const THEME_STORAGE_KEY = "urban-threads-theme";
 const DARK_THEME = "dark";
 const LIGHT_THEME = "light";
 
-const heroMemberButton = document.querySelector(
-  '.hero-actions .hero-btn-secondary[href*="login.html"]',
-);
-const ctaLoginButton = document.querySelector(
-  '.cta-actions .hero-btn-secondary[href*="login.html"]',
-);
+const heroMemberLink = document.getElementById("hero-member-link");
+const ctaLoginLink = document.getElementById("cta-login-link");
+
+const ADMIN_EMAILS = ["admin@gmail.com"];
 
 let isSignup = false;
 let unsubscribeCartListener = null;
@@ -120,13 +121,21 @@ function updateFormMode() {
     switchModeText.innerHTML =
       'Don\'t have an account? <button type="button" id="toggle-auth" class="toggle-auth-btn">Sign Up</button>';
   }
+}
 
-  const toggleBtn = document.getElementById("toggle-auth");
-  if (toggleBtn) {
-    toggleBtn.addEventListener("click", () => {
-      isSignup = !isSignup;
-      updateFormMode();
-    });
+function updateHomePageAuthCtas(user) {
+  const shouldHideGuestButtons = Boolean(user);
+
+  if (heroMemberLink) {
+    heroMemberLink.style.display = shouldHideGuestButtons
+      ? "none"
+      : "inline-flex";
+  }
+
+  if (ctaLoginLink) {
+    ctaLoginLink.style.display = shouldHideGuestButtons
+      ? "none"
+      : "inline-flex";
   }
 }
 
@@ -264,6 +273,18 @@ function setupMobileMenu() {
     mobileMenuOverlay.addEventListener("click", closeMobileMenu);
   }
 
+  document.addEventListener("click", (event) => {
+    if (!mobileMenu || !mobileMenu.classList.contains("open")) return;
+    if (window.innerWidth > 1023) return;
+
+    const clickedInsidePanel = event.target.closest(".mobile-menu-panel");
+    const clickedMenuToggle = event.target.closest("#menu-toggle");
+
+    if (!clickedInsidePanel && !clickedMenuToggle) {
+      closeMobileMenu();
+    }
+  });
+
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       closeMobileMenu();
@@ -286,23 +307,32 @@ function setupMobileMenu() {
   }
 }
 
-function updateHomePageAuthCtas(user) {
-  const shouldHideAuthOnlyButtons = Boolean(user);
+function normalizeEmail(value) {
+  return String(value || "")
+    .trim()
+    .toLowerCase();
+}
 
-  if (heroMemberButton) {
-    heroMemberButton.style.display = shouldHideAuthOnlyButtons
-      ? "none"
-      : "inline-flex";
+function isAdminUser(user, userData = {}) {
+  if (!user) return false;
+
+  const email = normalizeEmail(user.email);
+  const allowedEmails = ADMIN_EMAILS.map(normalizeEmail).filter(Boolean);
+
+  return userData.isAdmin === true || allowedEmails.includes(email);
+}
+
+function updateAdminLinks(canAccessAdmin) {
+  if (adminLink) {
+    adminLink.style.display = canAccessAdmin ? "inline-flex" : "none";
   }
 
-  if (ctaLoginButton) {
-    ctaLoginButton.style.display = shouldHideAuthOnlyButtons
-      ? "none"
-      : "inline-flex";
+  if (mobileAdminLink) {
+    mobileAdminLink.style.display = canAccessAdmin ? "block" : "none";
   }
 }
 
-function updateNavbar(user, username = "") {
+function updateNavbar(user, username = "", canAccessAdmin = false) {
   const displayName = username || user?.email || "";
 
   if (user) {
@@ -313,6 +343,7 @@ function updateNavbar(user, username = "") {
     if (mobileLoginLink) mobileLoginLink.style.display = "none";
     if (mobileLogoutLink) mobileLogoutLink.style.display = "block";
     if (mobileUserDisplay) mobileUserDisplay.textContent = displayName;
+    updateAdminLinks(canAccessAdmin);
   } else {
     if (loginLink) loginLink.style.display = "inline-block";
     if (logoutLink) logoutLink.style.display = "none";
@@ -321,6 +352,7 @@ function updateNavbar(user, username = "") {
     if (mobileLoginLink) mobileLoginLink.style.display = "block";
     if (mobileLogoutLink) mobileLogoutLink.style.display = "none";
     if (mobileUserDisplay) mobileUserDisplay.textContent = "Guest";
+    updateAdminLinks(false);
   }
 
   updateHomePageAuthCtas(user);
@@ -364,6 +396,23 @@ function setupNavbarScroll() {
     },
     { passive: true },
   );
+}
+
+function markAuthReady() {
+  window.requestAnimationFrame(() => {
+    document.body.classList.remove("auth-checking");
+    document.body.classList.add("auth-ready");
+  });
+}
+
+if (switchModeText) {
+  switchModeText.addEventListener("click", (event) => {
+    const toggleBtn = event.target.closest("#toggle-auth");
+    if (!toggleBtn) return;
+
+    isSignup = !isSignup;
+    updateFormMode();
+  });
 }
 
 if (authForm) {
@@ -433,8 +482,7 @@ onAuthStateChanged(auth, async (user) => {
   if (!user) {
     updateNavbar(null);
     watchCartCount(null);
-    document.body.classList.remove("auth-checking");
-    document.body.classList.add("auth-ready");
+    markAuthReady();
     return;
   }
 
@@ -444,9 +492,9 @@ onAuthStateChanged(auth, async (user) => {
 
     if (userSnap.exists()) {
       const userData = userSnap.data();
-      updateNavbar(user, userData.username || "");
+      updateNavbar(user, userData.username || "", isAdminUser(user, userData));
     } else {
-      updateNavbar(user);
+      updateNavbar(user, "", isAdminUser(user));
     }
   } catch (error) {
     console.error("Error getting user data:", error);
@@ -454,8 +502,7 @@ onAuthStateChanged(auth, async (user) => {
   }
 
   watchCartCount(user);
-  document.body.classList.remove("auth-checking");
-  document.body.classList.add("auth-ready");
+  markAuthReady();
 });
 
 async function handleLogout(e) {
@@ -482,16 +529,44 @@ if (mobileLogoutLink) {
 }
 
 function setActiveMobileMenuLink() {
-  const currentPage = window.location.pathname.split("/").pop() || "index.html";
+  const normalizePath = (path) => {
+    if (!path) return "/";
+
+    let cleanPath = path;
+
+    if (cleanPath.endsWith("index.html")) {
+      cleanPath = cleanPath.replace(/index\.html$/, "");
+    }
+
+    if (cleanPath.length > 1 && cleanPath.endsWith("/")) {
+      cleanPath = cleanPath.slice(0, -1);
+    }
+
+    return cleanPath || "/";
+  };
+
+  const currentPath = normalizePath(window.location.pathname);
 
   const allNavLinks = document.querySelectorAll(
     ".nav-links a, .mobile-menu-link",
   );
 
   allNavLinks.forEach((link) => {
-    const linkPage = link.getAttribute("href")?.split("/").pop();
+    const href = link.getAttribute("href");
 
-    if (linkPage === currentPage) {
+    if (!href || href === "#") {
+      link.classList.remove("active-page");
+      link.removeAttribute("aria-current");
+      return;
+    }
+
+    const linkUrl = new URL(
+      href,
+      window.location.origin + window.location.pathname,
+    );
+    const linkPath = normalizePath(linkUrl.pathname);
+
+    if (linkPath === currentPath) {
       link.classList.add("active-page");
       link.setAttribute("aria-current", "page");
     } else {

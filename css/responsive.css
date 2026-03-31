@@ -45,6 +45,28 @@ body.nav-is-hidden .navbar {
   display: inline-flex;
 }
 
+@media (max-width: 1280px) {
+
+  .admin-content-grid,
+  .admin-insights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-products-list {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-simple-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 1025px) {
+  .mobile-theme-toggle-btn {
+    display: none;
+  }
+}
+
 @media (max-width: 1024px) {
   .navbar {
     padding: 18px 20px;
@@ -114,11 +136,11 @@ body.nav-is-hidden .navbar {
     align-items: flex-start;
   }
 
-  .editorial-grid {
+  .editor-grid {
     grid-template-columns: 1fr;
   }
 
-  .editorial-card,
+  .editor-card,
   .spotlight-image-large,
   .spotlight-image-small {
     min-height: 280px;
@@ -135,6 +157,26 @@ body.nav-is-hidden .navbar {
   .hero-mini-card-image.compact-image,
   .hero-mini-image-card .hero-feature-image.compact-image {
     min-height: 360px;
+  }
+
+  .theme-toggle-btn {
+    display: none;
+  }
+
+  .mobile-theme-toggle-btn {
+    display: inline-flex;
+  }
+
+  .admin-page {
+    width: calc(100% - 20px);
+    margin: 14px auto 40px;
+    gap: 16px;
+  }
+
+  .admin-hero,
+  .admin-panel-card,
+  .admin-metric-card {
+    border-radius: 24px;
   }
 }
 
@@ -334,18 +376,18 @@ body.nav-is-hidden .navbar {
     min-height: 320px;
   }
 
-  .hero-feature-content,
+  .hero-content,
   .hero-mini-image-copy {
     padding: 18px;
   }
 
-  .hero-feature-content h2 {
+  .hero-content h2 {
     font-size: 1.75rem;
     line-height: 0.95;
   }
 
   .hero-mini-card h3,
-  .editorial-card h3 {
+  .editor-card h3 {
     font-size: 1.65rem;
     line-height: 0.95;
   }
@@ -355,12 +397,12 @@ body.nav-is-hidden .navbar {
     font-size: clamp(2rem, 9vw, 2.8rem);
   }
 
-  .editorial-card {
+  .editor-card {
     min-height: 220px;
     padding: 20px;
   }
 
-  .editorial-card-top {
+  .editor-card-top {
     top: 18px;
     left: 18px;
     right: 18px;
@@ -379,6 +421,87 @@ body.nav-is-hidden .navbar {
     column-gap: 14px;
     text-align: center;
     font-size: 0.8rem;
+  }
+
+  .admin-hero {
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .admin-hero-actions,
+  .admin-form-actions,
+  .admin-product-card-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-primary-action,
+  .admin-secondary-action,
+  .admin-edit-btn,
+  .admin-delete-btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .admin-metrics-grid,
+  .admin-products-list,
+  .admin-users-list,
+  .admin-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-panel-card {
+    padding: 18px;
+  }
+
+  .admin-panel-card h3 {
+    font-size: 1.5rem;
+  }
+
+  .admin-order-card-top,
+  .admin-snapshot-card,
+  .admin-breakdown-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .admin-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-product-card {
+    flex-direction: column;
+  }
+
+  .admin-product-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .admin-product-actions button {
+    width: auto;
+  }
+}
+
+@media (max-width: 520px) {
+  .admin-page {
+    width: calc(100% - 14px);
+    margin: 10px auto 28px;
+  }
+
+  .admin-hero h1 {
+    font-size: clamp(2.5rem, 13vw, 3.6rem);
+  }
+
+  .admin-metric-card {
+    padding: 18px;
+  }
+
+  .admin-user-card {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -519,7 +642,7 @@ body.nav-is-hidden .navbar {
 
   .hero-metric-card,
   .intro-stat,
-  .editorial-card,
+  .editor-card,
   .spotlight-point {
     padding: 16px;
   }
@@ -537,17 +660,17 @@ body.nav-is-hidden .navbar {
     min-height: 280px;
   }
 
-  .hero-feature-content,
+  .hero-content,
   .hero-mini-image-copy {
     padding: 16px 15px 18px;
   }
 
-  .hero-feature-content h2 {
+  .hero-content h2 {
     font-size: 1.5rem;
   }
 
   .hero-mini-card h3,
-  .editorial-card h3 {
+  .editor-card h3 {
     font-size: 1.4rem;
   }
 
@@ -558,22 +681,5 @@ body.nav-is-hidden .navbar {
 
   .cta-section {
     gap: 16px;
-  }
-}
-
-/*theme change */
-@media (max-width: 1024px) {
-  .theme-toggle-btn {
-    display: none;
-  }
-
-  .mobile-theme-toggle-btn {
-    display: inline-flex;
-  }
-}
-
-@media (min-width: 1025px) {
-  .mobile-theme-toggle-btn {
-    display: none;
   }
 }

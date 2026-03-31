@@ -1,2 +1,3 @@
-﻿# Urban-Threads
-A take on an e-commerce website called urban threads with firebase products and authentication.
+## Overview
+
+This project is a full-stack e-commerce application built with a focus on functionality and real-world features rather than branding. It integrates Firebase for authentication and backend services, with Firestore handling dynamic product data and real-time updates. The app includes a structured admin experience for managing content, along with user-focused features like persistent cart storage, automatic total cost calculation, and customizable themes. Overall, it serves as a practical implementation of modern web development concepts, showcasing state management, database integration, and scalable architecture in a clean and efficient way.
